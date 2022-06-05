@@ -1,14 +1,14 @@
-# TODO List (springboot)
-TODO List project with Spring Boot 2.7.0, Thymeleaf 3.x.x and MySQL 8
+# TODO List (Spring Boot)
+TODO List project with Spring Boot 2.7.0, Thymeleaf 3.0.x and MySQL 8
 
 > This project runs Java 17 LTS. 
 
 ### Assets:
 - **[Spring boot 2.7.x](https://start.spring.io/)**
-  - [Thymeleaf](https://www.thymeleaf.org/)
+  - [Thymeleaf 3.0.x](https://www.thymeleaf.org/doc/tutorials/3.0/extendingthymeleaf.html)
   - JPA & Hibernate
-  - MySQL 8
-- **[Bootstrap 5.2.x](https://getbootstrap.com/docs/5.1/getting-started/introduction/)**
+  - [MySQL 8](https://www.mysql.com/)
+- **[Bootstrap 5.2.x](https://getbootstrap.com/docs/5.2/getting-started/introduction/)**
 
 ---
 
