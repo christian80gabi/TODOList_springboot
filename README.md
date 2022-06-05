@@ -22,9 +22,7 @@ CRUD for Note Class  |             |       | [@christian80gabi](https://github.c
 
 > CRUD : Create Read Update Delete
 
-> 🔃 : In Progress
-
-> ✅ : Done
+> ✅ : Checked
 
 ---
 
