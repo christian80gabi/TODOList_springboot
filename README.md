@@ -12,15 +12,15 @@ TODO List project with Spring Boot 2.7.0, Thymeleaf 3.0.x and MySQL 8
   - [MySQL 8](https://www.mysql.com/)
 - **[Bootstrap 5.2.x](https://getbootstrap.com/docs/5.2/getting-started/introduction/)**
 
-TODO                 | In Progress | Done  | Contributor
-:------------------- | :----------:| :---: | -----------:
-CRUD for Step Class  |             |       | [@fabiolamatousoubong](https://github.com/fabiolamatousoubong)
-CRUD for Task Class  |             |       | [@fabiolamatousoubong](https://github.com/fabiolamatousoubong)
-CRUD for List Class  |             |       | [@fabiolamatousoubong](https://github.com/fabiolamatousoubong)
-CRUD for Group Class |             |       | [@christian80gabi](https://github.com/christian80gabi)
-CRUD for Note Class  |             |       | [@christian80gabi](https://github.com/christian80gabi)
+| TODO                 | In Progress | Done |                                                    Contributor |
+|:---------------------|:-----------:|:----:|---------------------------------------------------------------:|
+| CRUD for Step Class  |             |      | [@fabiolamatousoubong](https://github.com/fabiolamatousoubong) |
+| CRUD for Task Class  |             |      | [@fabiolamatousoubong](https://github.com/fabiolamatousoubong) |
+| CRUD for List Class  |             |      | [@fabiolamatousoubong](https://github.com/fabiolamatousoubong) |
+| CRUD for Group Class |      ✅      |      |         [@christian80gabi](https://github.com/christian80gabi) |
+| CRUD for Note Class  |      ✅      |      |         [@christian80gabi](https://github.com/christian80gabi) |
 
-> CRUD : Create Read Update Delete
+> **CRUD** : Create Read Update Delete
 
 > ✅ : Checked
 
