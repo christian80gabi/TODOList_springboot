@@ -25,7 +25,7 @@ public class GroupService {
 
     public Group getOneGroup(Long groupId) {
         return groupRepository.findById(groupId).orElseThrow(
-                () -> new IllegalStateException("Group with id" + groupId + "does not exist.")
+                () -> new IllegalStateException("List Group with id" + groupId + "does not exist.")
         );
     }
 
@@ -36,8 +36,6 @@ public class GroupService {
             throw new IllegalStateException("Group name already taken");
         }
 
-        group.setCreate_date(sharedService.getCurrentDateFormLocalDate());
-
         groupRepository.save(group);
     }
 
@@ -46,7 +44,8 @@ public class GroupService {
                 () -> new IllegalStateException("Group with id" + groupId + "does not exist.")
         );
 
-        group.setDelete_date(sharedService.getCurrentDateFormLocalDate());
+        group.setDeleted_date(sharedService.getCurrentDateFormLocalDate());
+        groupRepository.save(group);
     }
 
     @Transactional
@@ -67,8 +66,6 @@ public class GroupService {
             if (group.getIcon() != null && group.getIcon().length > 0 && group.getIcon() != groupObject.getIcon()) {
                 groupObject.setIcon(group.getIcon());
             }
-
-            groupObject.setUpdate_date(sharedService.getCurrentDateFormLocalDate());
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.projects.TODOList_springboot.tasks;
 
-public class TaskRepository {
-    
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface TaskRepository extends JpaRepository<Task, Long> {
 }

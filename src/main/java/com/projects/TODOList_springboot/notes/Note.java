@@ -1,6 +1,8 @@
 package com.projects.TODOList_springboot.notes;
 
 import com.projects.TODOList_springboot.shared.ObjectType;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -16,9 +18,13 @@ public class Note {
     private int objectId;
     private ObjectType objectType;
     private String value;
-    private Date create_date;
-    private Date update_date;
-    private Date delete_date;
+    @CreatedDate
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date created_date;
+    @LastModifiedDate
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updated_date;
+    private Date deleted_date;
 
     /* CONSTRUCTORS */
 
@@ -31,14 +37,14 @@ public class Note {
         this.value = value;
     }
 
-    public Note(Long id, int objectId, ObjectType objectType, String value, Date create_date, Date update_date, Date delete_date) {
+    public Note(Long id, int objectId, ObjectType objectType, String value, Date created_date, Date updated_date, Date deleted_date) {
         this.id = id;
         this.objectId = objectId;
         this.objectType = objectType;
         this.value = value;
-        this.create_date = create_date;
-        this.update_date = update_date;
-        this.delete_date = delete_date;
+        this.created_date = created_date;
+        this.updated_date = updated_date;
+        this.deleted_date = deleted_date;
     }
 
     /* GETTERS AND SETTERS */
@@ -75,28 +81,28 @@ public class Note {
         this.value = value;
     }
 
-    public Date getCreate_date() {
-        return create_date;
+    public Date getCreated_date() {
+        return created_date;
     }
 
-    public void setCreate_date(Date create_date) {
-        this.create_date = create_date;
+    public void setCreated_date(Date create_date) {
+        this.created_date = create_date;
     }
 
-    public Date getUpdate_date() {
-        return update_date;
+    public Date getUpdated_date() {
+        return updated_date;
     }
 
-    public void setUpdate_date(Date update_date) {
-        this.update_date = update_date;
+    public void setUpdated_date(Date update_date) {
+        this.updated_date = update_date;
     }
 
-    public Date getDelete_date() {
-        return delete_date;
+    public Date getDeleted_date() {
+        return deleted_date;
     }
 
-    public void setDelete_date(Date delete_date) {
-        this.delete_date = delete_date;
+    public void setDeleted_date(Date delete_date) {
+        this.deleted_date = delete_date;
     }
 
     @Override
@@ -106,9 +112,9 @@ public class Note {
                 ", objectId=" + objectId +
                 ", objectType=" + objectType +
                 ", value='" + value + '\'' +
-                ", create_date=" + create_date +
-                ", update_date=" + update_date +
-                ", delete_date=" + delete_date +
+                ", created_date=" + created_date +
+                ", updated_date=" + updated_date +
+                ", deleted_date=" + deleted_date +
                 '}';
     }
 }
