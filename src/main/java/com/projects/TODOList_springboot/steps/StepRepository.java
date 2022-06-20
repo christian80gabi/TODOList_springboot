@@ -1,5 +1,6 @@
 package com.projects.TODOList_springboot.steps;
 
-public class StepRepository {
-    
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface StepRepository extends JpaRepository<Step, Long> {
 }

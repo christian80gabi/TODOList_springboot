@@ -11,29 +11,25 @@ import java.util.Date;
 @Entity
 @Table
 public class List {
+    /* ATTRIBUTES */
 
-      /* ATTRIBUTES */
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String value;
     private boolean status;
-
-    
-    @Lob  //BLOB (Binary data)
     private Date create_date;
     private Date update_date;
-    private Date delete_date; 
+    private Date delete_date;
 
-     /* CONSTRUCTORS */
-    
+    /* CONSTRUCTORS */
+
     public List() {
         this.create_date = null;
         this.update_date = null;
         this.delete_date = null;
     }
-    
+
     public List(long id, String value, boolean status, Date create_date, Date update_date, Date delete_date) {
         this.id = id;
         this.value = value;
@@ -103,5 +99,4 @@ public class List {
                 + ", update_date=" + update_date + ", value=" + value + "]";
     }
 
-  
 }

@@ -2,28 +2,22 @@ package com.projects.TODOList_springboot.tasks;
 
 import java.sql.Date;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.*;
 
+@Table
+@Entity
 public class Task {
-
-    
-      /* ATTRIBUTES */
+    /* ATTRIBUTES */
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String value;
     private boolean status;
-
-    
-    @Lob  //BLOB (Binary data)
     private Date create_date;
     private Date update_date;
     private Date delete_date;
-    
+
     /* CONSTRUCTORS */
 
     public Task() {
@@ -96,10 +90,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task [create_date=" + create_date + ", delete_date=" + delete_date + ", id=" + id + ", status=" + status
-                + ", update_date=" + update_date + ", value=" + value + "]";
+        return "Task [create_date=" + create_date + ", delete_date=" + delete_date + ", id=" + id + ", status=" + status + ", update_date=" + update_date + ", value=" + value + "]";
     }
-
-    
-    
 }
