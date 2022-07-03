@@ -1,6 +1,10 @@
 package com.projects.TODOList_springboot.groups;
 
+import com.projects.TODOList_springboot.notes.NoteService;
+import com.projects.TODOList_springboot.notes.TODONote;
+import com.projects.TODOList_springboot.shared.ObjectType;
 import com.projects.TODOList_springboot.shared.SharedService;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,25 +16,27 @@ public class GroupService {
 
     private final GroupRepository groupRepository;
     private final SharedService sharedService;
+    private final NoteService noteService;
 
     @Autowired
-    public GroupService(GroupRepository groupRepository, SharedService sharedService) {
+    public GroupService(GroupRepository groupRepository, SharedService sharedService, NoteService noteService) {
         this.groupRepository = groupRepository;
         this.sharedService = sharedService;
+        this.noteService = noteService;
     }
 
-    public List<Group> getGroups() {
+    public List<TODOGroup> getGroups() {
         return groupRepository.findAll();
     }
 
-    public Group getOneGroup(Long groupId) {
+    public TODOGroup getOneGroup(Long groupId) {
         return groupRepository.findById(groupId).orElseThrow(
-                () -> new IllegalStateException("List Group with id" + groupId + "does not exist.")
+                () -> new IllegalStateException("Group with id" + groupId + "does not exist.")
         );
     }
 
-    public void addGroup(Group group) {
-        Optional<Group> groupValueOptional = groupRepository.findGroupByValue(group.getValue());
+    public void addGroup(@NotNull TODOGroup group) {
+        Optional<TODOGroup> groupValueOptional = groupRepository.findGroupByValue(group.getValue());
 
         if(groupValueOptional.isPresent()){
             throw new IllegalStateException("Group name already taken");
@@ -39,24 +45,15 @@ public class GroupService {
         groupRepository.save(group);
     }
 
-    public void deleteGroup(Long groupId) {
-        Group group = groupRepository.findById(groupId).orElseThrow(
-                () -> new IllegalStateException("Group with id" + groupId + "does not exist.")
-        );
-
-        group.setDeleted_date(sharedService.getCurrentDateFormLocalDate());
-        groupRepository.save(group);
-    }
-
     @Transactional
-    public void updateGroup(Long groupId, Group group) {
-        Group groupObject = groupRepository.findById(groupId).orElseThrow(
+    public void updateGroup(Long groupId, TODOGroup group) {
+        TODOGroup groupObject = groupRepository.findById(groupId).orElseThrow(
                 () -> new IllegalStateException("Group with id" + groupId + "does not exist.")
         );
 
         if (group != null) {
             if (group.getValue() != null && group.getValue().length() > 0 && !Objects.equals(group.getValue(), groupObject.getValue())) {
-                Optional<Group> groupNameOptional = groupRepository.findGroupByValue(group.getValue());
+                Optional<TODOGroup> groupNameOptional = groupRepository.findGroupByValue(group.getValue());
                 if (groupNameOptional.isPresent()) {
                     throw new IllegalStateException("Group Name already taken");
                 }
@@ -67,5 +64,24 @@ public class GroupService {
                 groupObject.setIcon(group.getIcon());
             }
         }
+    }
+
+    public void deleteGroup(Long groupId) {
+        TODOGroup TODOGroup = groupRepository.findById(groupId).orElseThrow(
+                () -> new IllegalStateException("Group with id" + groupId + "does not exist.")
+        );
+
+        TODOGroup.setDeletedDate(sharedService.getCurrentDateFormLocalDate());
+        groupRepository.save(TODOGroup);
+    }
+
+    public List<TODONote> getNotes(Long groupId) {
+        return noteService.getNotesByObjectTypeAndObjectId(ObjectType.GROUP, groupId);
+    }
+
+    public void addNote(Long groupId, TODONote note) {
+        noteService.checkIfNoteExists(note);
+
+        noteService.addNote(new TODONote(groupId, ObjectType.GROUP, note.getValue()));
     }
 }

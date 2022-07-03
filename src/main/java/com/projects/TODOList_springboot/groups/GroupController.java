@@ -1,6 +1,7 @@
 package com.projects.TODOList_springboot.groups;
 
 import com.projects.TODOList_springboot.counter.CounterService;
+import com.projects.TODOList_springboot.notes.TODONote;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -19,10 +20,10 @@ public class GroupController {
         abstract Object getOneGroup(Long groupId);
 
         @RequestMapping
-        abstract Object addGroup(Group group);
+        abstract Object addGroup(TODOGroup group);
 
         @RequestMapping
-        abstract Object updateGroup(Long groupId, Group group);
+        abstract Object updateGroup(Long groupId, TODOGroup group);
 
         @RequestMapping
         abstract Object deleteGroup(Long groupId);
@@ -41,19 +42,19 @@ public class GroupController {
 
         @Override
         @GetMapping
-        public List<Group> getGroups() {
+        public List<TODOGroup> getGroups() {
             return groupService.getGroups();
         }
 
         @Override
         @RequestMapping("/{groupId}")
-        public Group getOneGroup(@PathVariable Long groupId) {
+        public TODOGroup getOneGroup(@PathVariable Long groupId) {
             return groupService.getOneGroup(groupId);
         }
 
         @Override
         @PostMapping
-        public String addGroup(@RequestBody Group group) {
+        public String addGroup(@RequestBody TODOGroup group) {
             groupService.addGroup(group);
 
             return "Group (" + group + ") added successfully!";
@@ -61,7 +62,7 @@ public class GroupController {
 
         @Override
         @PutMapping(path = "{groupId}")
-        public String updateGroup(@PathVariable("groupId") Long groupId, @RequestBody Group group) {
+        public String updateGroup(@PathVariable("groupId") Long groupId, @RequestBody TODOGroup group) {
             groupService.updateGroup(groupId, group);
 
             return "Group (" + group + ")  updated successfully!";
@@ -73,6 +74,18 @@ public class GroupController {
             groupService.deleteGroup(groupId);
 
             return "Group  (" + groupId + ")  deleted successfully!";
+        }
+
+        @GetMapping(path = "/{groupId}/notes")
+        public List<TODONote> getNotes(@PathVariable Long groupId) {
+            return groupService.getNotes(groupId);
+        }
+
+        @PostMapping(path = "/{groupId}/addNote")
+        public String updateGroup(@PathVariable("groupId") Long groupId, @RequestBody TODONote note) {
+            groupService.addNote(groupId, note);
+
+            return "Note (" + note.getValue() + ") added to Group  (" +  groupId + ") updated successfully!";
         }
     }
 
@@ -97,7 +110,7 @@ public class GroupController {
             model.addObject("groups", groupService.getGroups());
             model.addObject("counter", counterService);
 
-            model.addObject("group", new Group());
+            model.addObject("group", new TODOGroup());
 
             return model;
         }
@@ -107,15 +120,15 @@ public class GroupController {
         public ModelAndView getOneGroup(@PathVariable Long groupId) {
             ModelAndView model = new ModelAndView("index");
 
-            Group group = groupService.getOneGroup(groupId);
-            model.addObject("group", group);
+            TODOGroup TODOGroup = groupService.getOneGroup(groupId);
+            model.addObject("group", TODOGroup);
 
             return model;
         }
 
         @Override
         @RequestMapping(path = "/add", method = {RequestMethod.POST, RequestMethod.GET})
-        public String addGroup(@ModelAttribute Group group) {
+        public String addGroup(@ModelAttribute TODOGroup group) {
             groupService.addGroup(group);
 
             return "redirect:/v1/groups";
@@ -123,7 +136,7 @@ public class GroupController {
 
         @Override
         @RequestMapping(path = "/{groupId}/update", method = {RequestMethod.PUT, RequestMethod.POST, RequestMethod.GET})
-        public String updateGroup(@PathVariable("groupId") Long groupId, @ModelAttribute("group") Group group) {
+        public String updateGroup(@PathVariable("groupId") Long groupId, @ModelAttribute("group") TODOGroup group) {
             groupService.updateGroup(groupId, group);
 
             return "redirect:/v1/groups";
