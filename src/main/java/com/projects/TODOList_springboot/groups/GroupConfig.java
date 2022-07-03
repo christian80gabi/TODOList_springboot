@@ -12,22 +12,22 @@ public class GroupConfig {
     @Bean
     CommandLineRunner commandLineRunner(GroupRepository groupRepository) {
         return args -> {
-            Group group1 = new Group(
+            TODOGroup TODOGroup1 = new TODOGroup(
                     "Home",
                     null
             );
 
-            Group group2 = new Group(
+            TODOGroup TODOGroup2 = new TODOGroup(
                     "Work",
                     null
             );
 
-            Group group3 = new Group(
+            TODOGroup TODOGroup3 = new TODOGroup(
                     "School",
                     null
             );
 
-            groupRepository.saveAll(List.of(group1, group2, group3));
+            groupRepository.saveAll(List.of(TODOGroup1, TODOGroup2, TODOGroup3));
         };
     }
 }

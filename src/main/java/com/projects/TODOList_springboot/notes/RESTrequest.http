@@ -1,0 +1,42 @@
+# Get All Notes
+GET http://localhost:8080/api/v1/notes HTTP/1.1
+
+
+###
+
+# Add Note
+POST http://localhost:8080/api/v1/notes HTTP/1.1
+content-type: application/json
+
+{
+  "objectId": 1,
+  "objectType": "GROUP",
+  "value": "TODOList App"
+}
+
+
+###
+
+
+PUT http://localhost:8080/api/v1/groups/2 HTTP/1.1
+content-type: application/json
+
+{
+  "value": "A web application"
+}
+
+
+###
+
+
+DELETE http://localhost:8080/api/v1/groups/1 HTTP/1.1
+
+
+###
+
+
+# Get all Notes for Group with ID: 1
+GET http://localhost:8080/api/v1/groups/1/notes HTTP/1.1
+
+
+###

@@ -1,9 +1,10 @@
+# Get all Group
 GET http://localhost:8080/api/v1/groups HTTP/1.1
 
 
 ###
 
-
+# Add a Group
 POST http://localhost:8080/api/v1/groups HTTP/1.1
 content-type: application/json
 
@@ -15,20 +16,35 @@ content-type: application/json
 
 ###
 
-
-PUT http://localhost:8080/api/v1/groups/1 HTTP/1.1
+# Update Group with ID: 4
+PUT http://localhost:8080/api/v1/groups/4 HTTP/1.1
 content-type: application/json
 
 {
-  "name": "ADS app",
-  "description": null
+  "value": "ADS Management"
 }
 
 
 ###
 
-
+# Delete Group with ID: 1
 DELETE http://localhost:8080/api/v1/groups/1 HTTP/1.1
 
+
+###
+
+# Get all Notes for Group with ID: 4
+GET http://localhost:8080/api/v1/groups/4/notes HTTP/1.1
+
+
+###
+
+# Add Note to Group with ID: 4
+POST http://localhost:8080/api/v1/groups/4/addNote HTTP/1.1
+content-type: application/json
+
+{
+  "value": "A web application for managing agricultural products."
+}
 
 ###

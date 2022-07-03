@@ -1,14 +1,17 @@
 package com.projects.TODOList_springboot.groups;
 
+import com.projects.TODOList_springboot.lists.TODOList;
 import com.projects.TODOList_springboot.shared.AuditableBase;
 
 import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
-@Table(name = "list_group")
-public class Group extends AuditableBase {
+@Table
+public class TODOGroup extends AuditableBase {
     /* ATTRIBUTES */
 
     @Id
@@ -17,23 +20,30 @@ public class Group extends AuditableBase {
     private String value;
     @Lob  //BLOB (Binary data)
     private Byte[] icon;
-    private Date deleted_date;
+    private Date deletedDate;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "todo_group_id")
+    private Set<TODOList> lists = new LinkedHashSet<>();
 
     /* CONSTRUCTORS */
 
-    public Group() {
+    public TODOGroup() {
+        this.deletedDate = null;
     }
 
-    public Group(String value, Byte[] icon) {
+    public TODOGroup(String value, Byte[] icon) {
         this.value = value;
         this.icon = icon;
+        this.deletedDate = null;
     }
 
-    public Group(Long id, String value, Byte[] icon, Date deleted_date) {
+    public TODOGroup(Long id, String value, Byte[] icon, Date deletedDate, Set<TODOList> lists) {
         this.id = id;
         this.value = value;
         this.icon = icon;
-        this.deleted_date = deleted_date;
+        this.deletedDate = deletedDate;
+        this.lists = lists;
     }
 
     /* GETTERS AND SETTERS */
@@ -62,21 +72,30 @@ public class Group extends AuditableBase {
         this.icon = icon;
     }
 
-    public Date getDeleted_date() {
-        return deleted_date;
+    public Date getDeletedDate() {
+        return deletedDate;
     }
 
-    public void setDeleted_date(Date deleted_date) {
-        this.deleted_date = deleted_date;
+    public void setDeletedDate(Date deletedDate) {
+        this.deletedDate = deletedDate;
+    }
+
+    public Set<TODOList> getLists() {
+        return lists;
+    }
+
+    public void setLists(Set<TODOList> lists) {
+        this.lists = lists;
     }
 
     @Override
     public String toString() {
-        return "Group{" +
+        return "TODOGroup{" +
                 "id=" + id +
                 ", value='" + value + '\'' +
                 ", icon=" + Arrays.toString(icon) +
-                ", deleted_date=" + deleted_date +
+                ", deletedDate=" + deletedDate +
+                ", lists=" + lists +
                 '}';
     }
 }
